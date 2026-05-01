@@ -25,7 +25,7 @@ const isActive = href === pathname || href === "/" + (subpath?.[0] || "");
 
   .nav-link::after {
     content: "";
-    @apply absolute -bottom-1 left-1/2 h-0.5 w-0 bg-[#C9A84C];
+    @apply absolute -bottom-1 left-1/2 h-0.5 w-0 bg-primary;
     transition:
       width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
       left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
