@@ -1,0 +1,95 @@
+---
+const technologies = [
+  "JavaScript",
+  "TypeScript",
+  "C",
+  "C++",
+  "Java",
+  "Scala",
+  "Ruby",
+  "Python",
+  "Linux",
+  "Debian",
+  "Arch",
+  "Git",
+  "GitLab",
+  "Docker",
+  "AWS",
+  "Azure",
+  "Kubernetes",
+  "HTML",
+  "CSS",
+  "Node.js",
+  "React",
+  "Vue",
+  "Angular",
+  "Astro",
+  "Electron",
+  "Tailwind",
+  "Bootstrap",
+  "MUI",
+  "Webpack",
+  "Vite",
+  "MongoDB",
+  "PostgreSQL"
+];
+---
+
+<style>
+    .marquee-container {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        padding: 1rem 0;
+        transform: rotate(-2deg);
+        margin: 4rem 0;
+        background-color: var(--color-bg);
+        border-top: 2px solid var(--color-primary);
+        border-bottom: 2px solid var(--color-primary);
+    }
+
+    .marquee-track {
+        display: flex;
+        gap: 3rem;
+        width: max-content;
+        animation: scroll 100s linear infinite;
+        will-change: transform;
+    }
+
+    .marquee-container {
+        transform-origin: center center;
+    }
+
+    .tech-item {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem 1.75rem;
+        border-radius: 40px;
+        font-size: 1.25rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+    }
+
+    @keyframes scroll {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+</style>
+
+<div class="marquee-container">
+    <div class="marquee-track">
+        {technologies.map((tech, index) => (
+            <span class="tech-item">◆ {tech}</span>
+        ))}
+        {technologies.map((tech, index) => (
+            <span class="tech-item">◆ {tech}</span>
+        ))}
+    </div>
+</div>
