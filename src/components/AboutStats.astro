@@ -1,0 +1,108 @@
+<div class="grid lg:col-span-2 grid-cols-2 gap-3">
+  <div class="stat-card rounded-xl p-5">
+    <div
+      class="stat-number font-jura font-bold text-2xl md:text-3xl text-primary-300 mb-1"
+      id="statRepos"
+    >
+      0
+    </div>
+    <div class="text-[9px] tracking-[.25em] uppercase text-primary-800">
+      Repositories
+    </div>
+  </div>
+  <div class="stat-card rounded-xl p-5">
+    <div
+      class="stat-number font-jura font-bold text-2xl md:text-3xl text-primary-300 mb-1"
+      id="statYears"
+    >
+      0
+    </div>
+    <div class="text-[9px] tracking-[.25em] uppercase text-primary-800">
+      Years coding
+    </div>
+  </div>
+  <div class="col-span-2 stat-card rounded-xl p-6 flex items-center gap-4">
+    <div
+      class="w-12 h-12 rounded-lg bg-primary-900/20 border border-primary-700/10 flex items-center justify-center shrink-0"
+    >
+      <span
+        class="iconify text-primary-500"
+        data-icon="mdi:code-braces"
+        data-width="24"></span>
+    </div>
+    <div>
+      <div
+        class="stat-number font-jura font-bold text-2xl text-primary-300"
+        id="statCommits"
+      >
+        0
+      </div>
+      <div class="text-[9px] tracking-[.25em] uppercase text-primary-800">
+        Estimated contributions
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .stat-card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(201, 168, 76, 0.08);
+    background: rgba(13, 13, 13, 0.5);
+    backdrop-filter: blur(12px);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .stat-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #c9a84c, transparent);
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+  .stat-card:hover {
+    border-color: rgba(201, 168, 76, 0.2);
+    transform: translateY(-2px);
+  }
+  .stat-card:hover::after {
+    opacity: 0.6;
+  }
+</style>
+
+<script>
+  async function fetchGitHubStats() {
+    try {
+      const uR = await fetch("https://api.github.com/users/rodnye");
+      
+      if (!uR.ok) throw new Error();
+
+      const user = await uR.json();
+      const animateNumber = (id: string, target: number) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+
+        const duration = 1800;
+        const start = performance.now();
+        const tick = (now: number) => {
+          const p = Math.min((now - start) / duration, 1);
+          el.textContent = Math.round(
+            (1 - Math.pow(1 - p, 4)) * target,
+          ).toLocaleString();
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      };
+      animateNumber("statRepos", user.public_repos);
+      animateNumber("statYears", 5);
+      animateNumber("statCommits", user.public_repos * 47);
+    } catch (err) {
+      console.warn("GitHub stats failed", err);
+      document.getElementById("statYears")!.textContent = "5";
+    }
+  }
+  fetchGitHubStats();
+</script>

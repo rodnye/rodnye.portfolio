@@ -1,0 +1,63 @@
+---
+const phrases = [
+  "Full Stack Developer",
+  "Top #10 GitHub in Cuba",
+  "Clean code lover",
+];
+---
+
+<div
+  class="text-primary-500/50 font-quantico flex items-center gap-1 text-2xl"
+  id="typing-text"
+>
+</div>
+
+<script is:inline define:vars={{ phrases }}>
+  const textElement = document.getElementById("typing-text");
+
+  let phraseIndex = 0;
+  let charIndex = 0;
+
+  let isDeleting = false;
+
+  const typingSpeed = 80;
+  const deletingSpeed = 45;
+
+  const pauseAfterTyping = 1800;
+  const pauseAfterDeleting = 400;
+
+  function type() {
+    const currentPhrase = phrases[phraseIndex];
+
+    if (!isDeleting) {
+      textElement.textContent = currentPhrase.slice(0, charIndex + 1);
+      charIndex++;
+
+      if (charIndex === currentPhrase.length) {
+        isDeleting = true;
+
+        setTimeout(type, pauseAfterTyping);
+        return;
+      }
+
+      setTimeout(type, typingSpeed);
+    } else {
+      textElement.textContent = currentPhrase.slice(0, charIndex - 1);
+      charIndex--;
+
+      if (charIndex === 0) {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+
+        setTimeout(type, pauseAfterDeleting);
+        return;
+      }
+
+      setTimeout(type, deletingSpeed);
+    }
+
+     textElement.textContent += '|';
+  }
+
+  type();
+</script>

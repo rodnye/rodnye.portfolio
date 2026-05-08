@@ -1,13 +1,21 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
-import DevPicture from "../components/DevPicture.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import MeshBackground from "../components/MeshBackground.astro";
 import OrbitsBackground from "../components/OrbitsBackground.astro";
 import SkillMarquee from "../components/SkillMarquee.astro";
+import NoiseOverlay from "../components/NoiseOverlay.astro";
+import ScrollProgress from "../components/ScrollProgress.astro";
+import TypingEffect from "../components/TypingEffect.astro";
+import AboutStats from "../components/AboutStats.astro";
+import ContactSection from "../components/ContactSection.astro";
+import Divisor from "../components/Divisor.astro";
+import { Icon } from "astro-icon/components";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+
 import "../styles/global.css";
+import ProjectsSection from "../components/ProjectsSection.astro";
 ---
 
 <!doctype html>
@@ -15,125 +23,151 @@ import "../styles/global.css";
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     <style>
-      .shimmer {
-        background: linear-gradient(
-          110deg,
-          #6b581c 0%,
-          #c9a84c 15%,
-          #ffe080 35%,
-          #c9a84c 55%,
-          #6b581c 75%,
-          #c9a84c 100%
-        );
-        background-size: 250% 100%;
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: shimmerMove 5s ease-in-out infinite;
+      .terminal {
+        background: rgba(8, 8, 8, 0.8);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(201, 168, 76, 0.1);
+        border-radius: 12px;
+        overflow: hidden;
       }
-      @keyframes shimmerMove {
-        0%,
-        100% {
-          background-position: 250% center;
-        }
-        50% {
-          background-position: -50% center;
-        }
+      .terminal-dots {
+        display: flex;
+        gap: 6px;
+        padding: 14px 16px;
+        border-bottom: 1px solid rgba(201, 168, 76, 0.06);
       }
-
-      .reveal {
-        opacity: 0;
-        transform: translateY(50px);
-        transition:
-          opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-          transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-      }
-      .reveal {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      .reveal-d1 {
-        transition-delay: 0.1s;
-      }
-      .reveal-d2 {
-        transition-delay: 0.2s;
-      }
-      .reveal-d3 {
-        transition-delay: 0.3s;
-      }
-      .reveal-d4 {
-        transition-delay: 0.4s;
-      }
-      .reveal-d5 {
-        transition-delay: 0.5s;
-      }
-      .reveal-d6 {
-        transition-delay: 0.6s;
-      }
-      .reveal-d7 {
-        transition-delay: 0.7s;
+      .terminal-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
       }
     </style>
   </head>
   <body>
+    <NoiseOverlay />
+    <ScrollProgress />
+
     <Header />
     <main class="relative">
-      <div id="noise-bg"></div>
+      <!-- Hero Section -->
       <section
         id="hero"
-        class="relative min-h-screen flex items-center flex-col justify-center px-6 overflow-hidden"
+        class="relative flex items-center flex-col justify-center px-6 overflow-hidden"
       >
         <MeshBackground />
-        <OrbitsBackground/>
+        <OrbitsBackground />
 
-        <div class="relative z-10 max-w-4xl">
+        <div class="flex md:self-start lg:pb-50 md:pl-12 lg:self-auto flex-col relative z-10 max-w-4xl">
           <h1
-            class="reveal reveal-d1 font-jura font-bold text-5xl leading-[.9] tracking-tighter mb-6"
-          >
+            class="text-center md:text-left mt-20 font-jura font-bold text-5xl tracking-tighter mb-6"
+            >
             <span
-              class="block text-primary-300/30 font-light text-2xl sm:text-3xl md:text-4xl mb-2 tracking-widest"
+              class="duration-600 taos:translate-y-full taos:opacity-0 block text-primary-300/30 font-light text-2xl sm:text-3xl md:text-4xl mb-2 tracking-widest"
             >
-              Hola, soy
+              Hi, I'm
             </span>
-            <span class="glitch shimmer" data-text="rodnye">Rodny Estrada</span>
+            <span class="duration-800 taos:translate-y-80 taos:opacity-0 shimmer">Rodny Estrada</span>
           </h1>
-          <div class="reveal reveal-d2 h-8 mb-8">
-            <p
-              class="text-primary-500/50 text-sm md:text-base font-quantico typing-cursor"
-              id="typingText"
-            >
-            </p>
+
+          <div class="h-8 mb-8">
+            <TypingEffect />
           </div>
+          
           <div
-            class="reveal reveal-d3 flex flex-col sm:flex-row items-center justify-center gap-4"
+            class="mt-30 md:mt-20 flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <a
               href="#projects"
-              class="magnetic-btn px-8 py-4 bg-linear-to-r from-primary-700 via-primary-600 to-primary-500 text-dark-900 font-jura font-semibold tracking-[.15em] text-sm rounded-lg transition-all duration-300 hover:shadow-[0_0_40px_rgba(201,168,76,0.25)] hover:scale-[1.02]"
+              class="px-8 py-4 bg-linear-to-r from-primary-700 via-primary-600 to-primary-500 text-dark-900 font-jura font-semibold tracking-[.15em] text-sm rounded-lg transition-all duration-300 hover:shadow-[0_0_40px_rgba(201,168,76,0.25)] hover:scale-[1.02]"
             >
               <span class="btn-shine rounded-lg"></span>
-              <span class="relative z-10 flex items-center gap-2"
-                >Ver proyectos<span
-                  class="iconify"
-                  data-icon="mdi:arrow-down-right"
-                  data-width="16"></span></span
-              >
+              <span class="relative z-10 flex items-center gap-2">
+                View Projects
+                <Icon name="mdi:arrow-down-right"  />           
+               </span>
             </a>
             <a
               href="#contact"
-              class="magnetic-btn px-8 py-4 border border-primary-700/20 text-primary-400 font-jura font-semibold tracking-[.15em] text-sm rounded-lg hover:border-primary-500/40 hover:text-primary-200 hover:bg-primary-900/5 transition-all duration-300"
+              class="px-8 py-4 border border-primary-700/20 text-primary-400 font-jura font-semibold tracking-[.15em] text-sm rounded-lg hover:border-primary-500/40 hover:text-primary-200 hover:bg-primary-900/5 transition-all duration-300"
             >
-              <span class="btn-shine rounded-lg"></span><span
-                class="relative z-10">Contactar</span
-              >
+              <span class="btn-shine rounded-lg"></span>
+              <span class="relative z-10"> Contact Me </span>
             </a>
           </div>
         </div>
       </section>
 
-      <DevPicture/>
-      <SkillMarquee />
+      <section class="relative -z-5">
+        <div
+          class="w-80 lg:w-120 opacity-60 absolute right-0 bottom-10 md:bottom-25"
+        >
+          <img src="/src/assets/dev.webp" />
+        </div>
+        <SkillMarquee />
+      </section>
+
+      <!-- About Section -->
+      <section id="about" class="relative py-32 px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="grid lg:grid-cols-5 gap-16 items-start">
+            <div class="lg:col-span-3">
+              <span
+                class="reveal text-[10px] tracking-[.35em] uppercase text-primary-700 block mb-4"
+                >01 — About Me</span
+              >
+              <h2
+                class="reveal reveal-d1 font-jura font-bold text-3xl md:text-5xl text-primary-200 tracking-tight mb-8 leading-[1.1]"
+              >
+                Building the<br /><span class="text-primary-500"
+                  >digital future</span
+                >
+              </h2>
+              <div class="reveal reveal-d2 terminal">
+                <div class="terminal-dots">
+                  <div class="terminal-dot bg-red-500/60"></div>
+                  <div class="terminal-dot bg-yellow-500/60"></div>
+                  <div class="terminal-dot bg-green-500/60"></div>
+                  <span
+                    class="text-[10px] tracking-widest text-primary-800 ml-3"
+                    >about.md</span
+                  >
+                </div>
+                <div class="p-6 space-y-3 text-sm">
+                  <p class="text-primary-600/70 leading-relaxed">
+                    <span class="text-primary-500 font-bold">$</span> I'm a passionate developer
+                    focused on creating software that makes an impact. My approach
+                    combines solid engineering with attention to detail.
+                  </p>
+                  <p class="text-primary-600/70 leading-relaxed">
+                    <span class="text-primary-500">$</span> I constantly explore new
+                    technologies to deliver solutions that not only work, but inspire.
+                  </p>
+                  <p class="text-primary-600/70 leading-relaxed">
+                    <span class="text-primary-500">$</span> Every project is an opportunity
+                    to learn, iterate, and exceed expectations.
+                  </p>
+                  <p class="text-primary-500/40 pt-2 typing-cursor">_</p>
+                </div>
+              </div>
+            </div>
+            <AboutStats />
+          </div>
+        </div>
+      </section>
+      <Divisor/>
+
+      <!-- Projects Section -->
+      <section id="projects" class="relative py-32 px-6">
+        <ProjectsSection/>
+      </section>
+      <Divisor/>
+
+      <!-- Contact Section -->
+      <section id="contact" class="relative py-32 px-6">
+        <ContactSection />
+      </section>
+      <Footer />
     </main>
-    <Footer />
+ 
   </body>
 </html>

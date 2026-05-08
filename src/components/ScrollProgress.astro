@@ -1,0 +1,41 @@
+<div id="scrollProgress"></div>
+
+<div
+  class="status-bar hidden md:flex fixed top-20 left-8 md:left-20 right-8 md:right-20 uppercase text-primary gap-5 items-center flex-wrap z-20"
+>
+  <span class="ml-auto" id="scrollPercent">0%</span>
+</div>
+
+<script>
+  const scrollProgress = document.getElementById("scrollProgress");
+  const scrollPercent = document.getElementById("scrollPercent");
+  function updateScroll() {
+    const h = document.documentElement;
+    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    if (scrollProgress) scrollProgress.style.width = pct + "%";
+    if (scrollPercent)
+      scrollPercent.textContent = Math.round(pct) + "% scrolled";
+  }
+  window.addEventListener("scroll", updateScroll);
+  updateScroll();
+</script>
+
+<style is:global>
+  #scrollProgress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    z-index: 9999;
+    background: linear-gradient(90deg, #8b7225, #c9a84c, #ffe080, #c9a84c);
+    width: 0%;
+    transition: width 0.1s linear;
+    box-shadow: 0 0 12px rgba(201, 168, 76, 0.5);
+  }
+  .status-bar {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #4a3d13;
+  }
+</style>

@@ -19,8 +19,9 @@ const isActive = href === pathname || href === "/" + (subpath?.[0] || "");
 
 <style>
   @reference "../styles/global.css";
+
   .nav-link {
-    @apply relative inline-block cursor-pointer text-[11px] tracking-[.2em] uppercase transition-colors;
+    @apply relative inline-block cursor-pointer font-bold tracking-[.2em] uppercase transition-colors;
   }
 
   .nav-link::after {

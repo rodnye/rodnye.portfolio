@@ -1,26 +1,25 @@
 @import "tailwindcss";
 
-
 @theme {
-	--font-jura: var(--font-jura);
-	--font-quantico: var(--font-cuantico);
-	--color-primary: #C9A84C;
-	--color-bg: #050505;
+  --font-jura: var(--font-jura);
+  --font-quantico: var(--font-cuantico);
+  --color-primary: #c9a84c;
+  --color-bg: #050505;
 }
 
 body {
-	background-color: var(--color-bg);
-	font-family: var(--font-jura);
-    color: var(--color-primary);
+  background-color: var(--color-bg);
+  font-family: var(--font-jura);
+  color: var(--color-primary);
 }
 
 #noise-bg {
-	opacity: .05;
-	background: url(../assets/noise-bg.webp);
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: -4;
+  opacity: 0.05;
+  background: url(../assets/noise-bg.webp);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -4;
 }
 
 h1,
@@ -29,5 +28,49 @@ h3,
 h4,
 h5,
 h6 {
-	font-family: var(--font-quantico);
+  font-family: var(--font-quantico);
+}
+
+::selection {
+  background: rgba(201, 168, 76, 0.35);
+  color: #ffe080;
+}
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #4a3d13;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #c9a84c;
+}
+
+.shimmer {
+  background: linear-gradient(
+    110deg,
+    #6b581c 0%,
+    #c9a84c 15%,
+    #ffe080 35%,
+    #c9a84c 55%,
+    #6b581c 75%,
+    #c9a84c 100%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmerMove 5s ease-in-out infinite;
+}
+@keyframes shimmerMove {
+  0%,
+  100% {
+    background-position: 250% center;
+  }
+  50% {
+    background-position: -50% center;
+  }
 }
