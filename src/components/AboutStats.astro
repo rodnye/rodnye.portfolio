@@ -1,43 +1,33 @@
-<div class="grid lg:col-span-2 grid-cols-2 gap-3">
+<div class="grid grid-cols-2 gap-3 lg:col-span-2">
   <div class="stat-card rounded-xl p-5">
     <div
-      class="stat-number font-jura font-bold text-2xl md:text-3xl text-primary-300 mb-1"
+      class="stat-number font-jura text-primary-300 mb-1 text-2xl font-bold md:text-3xl"
       id="statRepos"
     >
       0
     </div>
-    <div class="text-[9px] tracking-[.25em] uppercase text-primary-800">
-      Repositories
-    </div>
+    <div class="text-primary-800 text-[9px] tracking-[.25em] uppercase">Repositories</div>
   </div>
   <div class="stat-card rounded-xl p-5">
     <div
-      class="stat-number font-jura font-bold text-2xl md:text-3xl text-primary-300 mb-1"
+      class="stat-number font-jura text-primary-300 mb-1 text-2xl font-bold md:text-3xl"
       id="statYears"
     >
       0
     </div>
-    <div class="text-[9px] tracking-[.25em] uppercase text-primary-800">
-      Years coding
-    </div>
+    <div class="text-primary-800 text-[9px] tracking-[.25em] uppercase">Years coding</div>
   </div>
-  <div class="col-span-2 stat-card rounded-xl p-6 flex items-center gap-4">
+  <div class="stat-card col-span-2 flex items-center gap-4 rounded-xl p-6">
     <div
-      class="w-12 h-12 rounded-lg bg-primary-900/20 border border-primary-700/10 flex items-center justify-center shrink-0"
+      class="bg-primary-900/20 border-primary-700/10 flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border"
     >
-      <span
-        class="iconify text-primary-500"
-        data-icon="mdi:code-braces"
-        data-width="24"></span>
+      <span class="iconify text-primary-500" data-icon="mdi:code-braces" data-width="24"></span>
     </div>
     <div>
-      <div
-        class="stat-number font-jura font-bold text-2xl text-primary-300"
-        id="statCommits"
-      >
+      <div class="stat-number font-jura text-primary-300 text-2xl font-bold" id="statCommits">
         0
       </div>
-      <div class="text-[9px] tracking-[.25em] uppercase text-primary-800">
+      <div class="text-primary-800 text-[9px] tracking-[.25em] uppercase">
         Estimated contributions
       </div>
     </div>
@@ -54,7 +44,7 @@
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .stat-card::after {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
@@ -76,8 +66,8 @@
 <script>
   async function fetchGitHubStats() {
     try {
-      const uR = await fetch("https://api.github.com/users/rodnye");
-      
+      const uR = await fetch('https://api.github.com/users/rodnye');
+
       if (!uR.ok) throw new Error();
 
       const user = await uR.json();
@@ -89,19 +79,17 @@
         const start = performance.now();
         const tick = (now: number) => {
           const p = Math.min((now - start) / duration, 1);
-          el.textContent = Math.round(
-            (1 - Math.pow(1 - p, 4)) * target,
-          ).toLocaleString();
+          el.textContent = Math.round((1 - Math.pow(1 - p, 4)) * target).toLocaleString();
           if (p < 1) requestAnimationFrame(tick);
         };
         requestAnimationFrame(tick);
       };
-      animateNumber("statRepos", user.public_repos);
-      animateNumber("statYears", 5);
-      animateNumber("statCommits", user.public_repos * 47);
+      animateNumber('statRepos', user.public_repos);
+      animateNumber('statYears', 5);
+      animateNumber('statCommits', user.public_repos * 47);
     } catch (err) {
-      console.warn("GitHub stats failed", err);
-      document.getElementById("statYears")!.textContent = "5";
+      console.warn('GitHub stats failed', err);
+      document.getElementById('statYears')!.textContent = '5';
     }
   }
   fetchGitHubStats();

@@ -1,0 +1,54 @@
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<script>
+  const cursorGlow = document.getElementById('cursorGlow');
+  let mouseX = 0,
+    mouseY = 0,
+    glowX = 0,
+    glowY = 0;
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+  function animateGlow() {
+    if (!cursorGlow) return;
+    glowX += (mouseX - glowX) * 0.08;
+    glowY += (mouseY - glowY) * 0.08;
+    cursorGlow.style.left = glowX + 'px';
+    cursorGlow.style.top = glowY + 'px';
+    requestAnimationFrame(animateGlow);
+  }
+  animateGlow();
+  document
+    .querySelectorAll('a, button, .tilt-card, .stat-card, .animated-border, .magnetic-btn')
+    .forEach((el) => {
+      el.addEventListener('mouseenter', () => cursorGlow?.classList.add('expanded'));
+      el.addEventListener('mouseleave', () => cursorGlow?.classList.remove('expanded'));
+    });
+</script>
+
+<style is:global>
+  .cursor-glow {
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201, 168, 76, 0.05) 0%, transparent 65%);
+    pointer-events: none;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+    transition:
+      width 0.4s,
+      height 0.4s;
+  }
+  .cursor-glow.expanded {
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(201, 168, 76, 0.07) 0%, transparent 65%);
+  }
+  @media (max-width: 768px) {
+    .cursor-glow {
+      display: none;
+    }
+  }
+</style>

@@ -1,63 +1,54 @@
 ---
-import { GITHUB_LINK } from "../consts";
+import { GITHUB_LINK } from '../consts';
 ---
 
-<div class="max-w-6xl mx-auto">
-  <div class="text-center mb-16">
-    <span
-      class="reveal text-[10px] tracking-[.35em] uppercase text-primary-700 block mb-4"
+<div class="mx-auto max-w-6xl">
+  <div class="mb-16 text-center">
+    <span class="reveal text-primary-700 mb-4 block text-[10px] tracking-[.35em] uppercase"
       >02 — Projects</span
     >
     <h2
-      class="reveal reveal-d1 font-jura font-bold text-3xl md:text-5xl text-primary-200 tracking-tight"
+      class="reveal reveal-d1 font-jura text-primary-200 text-3xl font-bold tracking-tight md:text-5xl"
     >
       Selected <span class="text-primary-500">work</span>
     </h2>
   </div>
 
-  <div
-    id="reposLoading"
-    class="flex flex-col items-center justify-center py-20"
-  >
-    <div class="relative w-10 h-10 mb-4">
-      <div class="absolute inset-0 border-2 border-primary-700/20 rounded-full">
-      </div>
+  <div id="reposLoading" class="flex flex-col items-center justify-center py-20">
+    <div class="relative mb-4 h-10 w-10">
+      <div class="border-primary-700/20 absolute inset-0 rounded-full border-2"></div>
       <div
-        class="absolute inset-0 border-2 border-primary-500/60 border-t-transparent rounded-full animate-spin"
+        class="border-primary-500/60 absolute inset-0 animate-spin rounded-full border-2 border-t-transparent"
       >
       </div>
     </div>
-    <span class="text-[11px] text-primary-700 tracking-[.2em]"
-      >Cargando repositorios...</span
-    >
+    <span class="text-primary-700 text-[11px] tracking-[.2em]">Cargando repositorios...</span>
   </div>
-  <div id="reposGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
-  <div id="reposError" class="hidden text-center py-20">
+  <div id="reposGrid" class="grid gap-5 md:grid-cols-2 lg:grid-cols-3"></div>
+  <div id="reposError" class="hidden py-20 text-center">
     <span
-      class="iconify text-primary-700 mb-4 mx-auto"
+      class="iconify text-primary-700 mx-auto mb-4"
       data-icon="mdi:alert-circle-outline"
       data-width="40"></span>
-    <p class="text-primary-700 text-sm">
-      No se pudieron cargar los repositorios
-    </p>
+    <p class="text-primary-700 text-sm">No se pudieron cargar los repositorios</p>
     <a
-      href={GITHUB_LINK + "?tab=repositories"}
+      href={GITHUB_LINK + '?tab=repositories'}
       target="_blank"
-      class="inline-block mt-4 text-sm text-primary-500 hover:text-primary-300 underline underline-offset-4 transition-colors"
+      class="text-primary-500 hover:text-primary-300 mt-4 inline-block text-sm underline underline-offset-4 transition-colors"
       >Ver en GitHub →</a
     >
   </div>
-  <div class="reveal text-center mt-14">
+  <div class="reveal mt-14 text-center">
     <a
-      href={GITHUB_LINK + "?tab=repositories"}
+      href={GITHUB_LINK + '?tab=repositories'}
       target="_blank"
       rel="noopener"
-      class="magnetic-btn inline-flex items-center gap-2 text-[11px] tracking-[.2em] text-primary-600 hover:text-primary-400 transition-colors group px-6 py-3 border border-primary-700/10 rounded-lg hover:border-primary-700/20"
+      class="magnetic-btn text-primary-600 hover:text-primary-400 group border-primary-700/10 hover:border-primary-700/20 inline-flex items-center gap-2 rounded-lg border px-6 py-3 text-[11px] tracking-[.2em] transition-colors"
     >
       <span class="btn-shine rounded-lg"></span>
       <span class="relative z-10 flex items-center gap-2"
         >Ver todos<span
-          class="iconify group-hover:translate-x-1 transition-transform duration-300"
+          class="iconify transition-transform duration-300 group-hover:translate-x-1"
           data-icon="mdi:arrow-right"
           data-width="14"></span></span
       >
@@ -67,61 +58,58 @@ import { GITHUB_LINK } from "../consts";
 
 <script>
   function initTilt(card: HTMLElement) {
-    card.addEventListener("mousemove", (e: MouseEvent) => {
+    card.addEventListener('mousemove', (e: MouseEvent) => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       card.style.transform = `perspective(800px) rotateX(${((y - rect.height / 2) / rect.height / 2) * -6}deg) rotateY(${((x - rect.width / 2) / rect.width / 2) * 6}deg) scale3d(1.02,1.02,1.02)`;
-      card.style.setProperty("--mx", x + "px");
-      card.style.setProperty("--my", y + "px");
+      card.style.setProperty('--mx', x + 'px');
+      card.style.setProperty('--my', y + 'px');
     });
-    card.addEventListener("mouseleave", () => {
-      card.style.transform =
-        "perspective(800px) rotateX(0) rotateY(0) scale3d(1,1,1)";
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) scale3d(1,1,1)';
     });
   }
 
   function getLangColor(lang: string): string {
     const colors: Record<string, string> = {
-      JavaScript: "#F7DF1E",
-      TypeScript: "#3178C6",
-      Python: "#3776AB",
-      HTML: "#E34F26",
-      CSS: "#1572B6",
-      Java: "#ED8B00",
-      Go: "#00ADD8",
-      Rust: "#CE422B",
-      "C++": "#00599C",
-      C: "#A8B9CC",
-      Ruby: "#CC342D",
+      JavaScript: '#F7DF1E',
+      TypeScript: '#3178C6',
+      Python: '#3776AB',
+      HTML: '#E34F26',
+      CSS: '#1572B6',
+      Java: '#ED8B00',
+      Go: '#00ADD8',
+      Rust: '#CE422B',
+      'C++': '#00599C',
+      C: '#A8B9CC',
+      Ruby: '#CC342D',
     };
-    return colors[lang] || "#C9A84C";
+    return colors[lang] || '#C9A84C';
   }
 
   async function fetchAndRenderRepos() {
-    const loading = document.getElementById("reposLoading");
-    const grid = document.getElementById("reposGrid");
-    const errorDiv = document.getElementById("reposError");
+    const loading = document.getElementById('reposLoading');
+    const grid = document.getElementById('reposGrid');
+    const errorDiv = document.getElementById('reposError');
     try {
-      const res = await fetch(
-        "https://api.github.com/users/rodnye/repos?sort=updated&per_page=9",
-      );
+      const res = await fetch('https://api.github.com/users/rodnye/repos?sort=updated&per_page=9');
       if (!res.ok) throw new Error();
       const repos = await res.json();
       const filtered = repos.filter((r: any) => !r.fork).slice(0, 6);
       if (!filtered.length) throw new Error();
       grid!.innerHTML = filtered
         .map((repo: any, i: number) => {
-          const lang = repo.language || "";
+          const lang = repo.language || '';
           const lc = getLangColor(lang);
           const desc = repo.description
             ? repo.description.length > 90
-              ? repo.description.slice(0, 90) + "…"
+              ? repo.description.slice(0, 90) + '…'
               : repo.description
-            : "Sin descripción disponible";
-          const date = new Date(repo.updated_at).toLocaleDateString("es-ES", {
-            year: "numeric",
-            month: "short",
+            : 'Sin descripción disponible';
+          const date = new Date(repo.updated_at).toLocaleDateString('es-ES', {
+            year: 'numeric',
+            month: 'short',
           });
           const topics = (repo.topics || []).slice(0, 3);
           return `<a href="${repo.html_url}" target="_blank" rel="noopener" class="tilt-card rounded-xl p-6 flex flex-col gap-4 reveal reveal-d${Math.min(i + 1, 7)}">
@@ -134,35 +122,35 @@ import { GITHUB_LINK } from "../consts";
             <span class="iconify text-primary-900 hover:text-primary-500 transition-colors flex-shrink-0 mt-1" data-icon="mdi:arrow-top-right" data-width="14"></span>
           </div>
           <p class="text-[11px] text-primary-600/50 leading-relaxed flex-grow relative z-10">${desc}</p>
-          ${topics.length ? `<div class="flex flex-wrap gap-1.5 relative z-10">${topics.map((t: string) => `<span class="px-2 py-0.5 text-[9px] tracking-wider text-primary-700/60 border border-primary-700/[0.06] rounded bg-primary-900/5">${t}</span>`).join("")}</div>` : ""}
+          ${topics.length ? `<div class="flex flex-wrap gap-1.5 relative z-10">${topics.map((t: string) => `<span class="px-2 py-0.5 text-[9px] tracking-wider text-primary-700/60 border border-primary-700/[0.06] rounded bg-primary-900/5">${t}</span>`).join('')}</div>` : ''}
           <div class="flex items-center gap-4 text-[10px] text-primary-800 relative z-10 pt-2 border-t border-primary-700/[0.05]">
-            ${lang ? `<span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full" style="background:${lc};box-shadow:0 0 4px ${lc}40"></span>${lang}</span>` : "<span></span>"}
+            ${lang ? `<span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full" style="background:${lc};box-shadow:0 0 4px ${lc}40"></span>${lang}</span>` : '<span></span>'}
             <span class="flex items-center gap-1"><span class="iconify" data-icon="mdi:star-four-points-outline" data-width="11"></span>${repo.stargazers_count}</span>
             <span class="flex items-center gap-1"><span class="iconify" data-icon="mdi:source-fork" data-width="11"></span>${repo.forks_count}</span>
             <span class="ml-auto opacity-50">${date}</span>
           </div>
         </a>`;
         })
-        .join("");
-      loading?.classList.add("hidden");
-      grid?.classList.remove("hidden");
+        .join('');
+      loading?.classList.add('hidden');
+      grid?.classList.remove('hidden');
       document
-        .querySelectorAll("#reposGrid .tilt-card")
+        .querySelectorAll('#reposGrid .tilt-card')
         .forEach((card) => initTilt(card as HTMLElement));
       // Re-trigger reveal observer if needed (global observer will catch new .reveal elements)
       if ((window as any).revealObserver) {
         document
-          .querySelectorAll("#reposGrid .reveal")
+          .querySelectorAll('#reposGrid .reveal')
           .forEach((el) => (window as any).revealObserver.observe(el));
       }
     } catch (err) {
-      loading?.classList.add("hidden");
-      errorDiv?.classList.remove("hidden");
+      loading?.classList.add('hidden');
+      errorDiv?.classList.remove('hidden');
     }
   }
   // Wait for DOM and iconify to be ready
-  if (document.readyState === "loading")
-    document.addEventListener("DOMContentLoaded", fetchAndRenderRepos);
+  if (document.readyState === 'loading')
+    document.addEventListener('DOMContentLoaded', fetchAndRenderRepos);
   else fetchAndRenderRepos();
 </script>
 

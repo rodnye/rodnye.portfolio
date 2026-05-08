@@ -1,74 +1,68 @@
 ---
-import { Icon } from "astro-icon/components";
-import {
-  EMAIL,
-  GITHUB_LINK,
-  GOOGLE_LINK,
-  LINKEDIN_LINK,
-  TELEGRAM_LINK,
-  X_LINK,
-} from "../consts";
+import { Icon } from 'astro-icon/components';
+import { EMAIL, GITHUB_LINK, GOOGLE_LINK, LINKEDIN_LINK, TELEGRAM_LINK, X_LINK } from '../consts';
 
 const socialIcons = [
-  { name: "mdi:google", href: GOOGLE_LINK },
-  { name: "mdi:telegram", href: TELEGRAM_LINK },
-  { name: "mdi:github", href: GITHUB_LINK },
-  { name: "mdi:linkedin", href: LINKEDIN_LINK },
-  { name: "mdi:twitter", href: X_LINK },
-  { name: "mdi:email-variant", href: `mailto:${EMAIL}` },
+  { name: 'mdi:google', href: GOOGLE_LINK },
+  { name: 'mdi:telegram', href: TELEGRAM_LINK },
+  { name: 'mdi:github', href: GITHUB_LINK },
+  { name: 'mdi:linkedin', href: LINKEDIN_LINK },
+  { name: 'mdi:twitter', href: X_LINK },
+  { name: 'mdi:email-variant', href: `mailto:${EMAIL}` },
 ];
 ---
 
-<div class="max-w-2xl mx-auto text-center px-4 sm:px-6">
-  <span
-    class="text-[9px] sm:text-[10px] tracking-[.35em] uppercase text-primary-700 block mb-4"
-  >
+<div class="mx-auto max-w-2xl px-4 text-center sm:px-6">
+  <span class="text-primary-700 mb-4 block text-[9px] tracking-[.35em] uppercase sm:text-[10px]">
     04 — Contact
   </span>
   <h2
-    class="font-jura font-bold text-2xl sm:text-3xl md:text-5xl text-primary-200 tracking-tight mb-6"
+    class="font-jura text-primary-200 mb-6 text-2xl font-bold tracking-tight sm:text-3xl md:text-5xl"
   >
     Let's work <span class="text-primary-500">together</span>
   </h2>
-  <p class="text-primary-500/40 leading-relaxed mb-10 sm:mb-14 max-w-md mx-auto text-sm sm:text-base">
-    Do you have a project in mind? I'd love to hear your idea and explore how I can help you bring it to life.
+  <p
+    class="text-primary-500/40 mx-auto mb-10 max-w-md text-sm leading-relaxed sm:mb-14 sm:text-base"
+  >
+    Do you have a project in mind? I'd love to hear your idea and explore how I can help you bring
+    it to life.
   </p>
-  
-  <div class="space-y-3 max-w-sm mx-auto">
+
+  <div class="mx-auto max-w-sm space-y-3">
     <a
       href={GITHUB_LINK}
       target="_blank"
       rel="noopener"
-      class="animated-border flex items-center gap-3 sm:gap-4 p-3 sm:p-4 border border-primary-700/10 bg-dark-200/30 rounded-xl justify-center hover:border-primary-700/20 transition-all duration-500 group"
+      class="animated-border border-primary-700/10 bg-dark-200/30 hover:border-primary-700/20 group flex items-center justify-center gap-3 rounded-xl border p-3 transition-all duration-500 sm:gap-4 sm:p-4"
     >
       <div
-        class="w-8 h-8 sm:w-9 sm:h-9 shrink-0 rounded-lg bg-primary-900/15 border border-primary-700/10 flex items-center justify-center group-hover:bg-primary-900/25 transition-colors"
+        class="bg-primary-900/15 border-primary-700/10 group-hover:bg-primary-900/25 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border transition-colors sm:h-9 sm:w-9"
       >
         <Icon name="mdi:github" />
       </div>
       <span
-        class="text-xs sm:text-sm tracking-wider text-primary-400 group-hover:text-primary-200 transition-colors break-all"
+        class="text-primary-400 group-hover:text-primary-200 text-xs tracking-wider break-all transition-colors sm:text-sm"
       >
         {GITHUB_LINK}
       </span>
       <Icon
-        class="text-primary-800 group-hover:text-primary-600 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0"
+        class="text-primary-800 group-hover:text-primary-600 shrink-0 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
         name="mdi:open-in-new"
       />
     </a>
-    
+
     <div
       id="emailContainer"
-      class="animated-border flex items-center gap-3 sm:gap-4 p-3 sm:p-4 border border-primary-700/10 bg-dark-200/30 rounded-xl justify-center hover:border-primary-700/20 transition-all duration-500 cursor-pointer group"
+      class="animated-border border-primary-700/10 bg-dark-200/30 hover:border-primary-700/20 group flex cursor-pointer items-center justify-center gap-3 rounded-xl border p-3 transition-all duration-500 sm:gap-4 sm:p-4"
       onclick="copyEmail()"
     >
       <div
-        class="w-8 h-8 sm:w-9 sm:h-9 shrink-0 rounded-lg bg-primary-900/15 border border-primary-700/10 flex items-center justify-center group-hover:bg-primary-900/25 transition-colors"
+        class="bg-primary-900/15 border-primary-700/10 group-hover:bg-primary-900/25 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border transition-colors sm:h-9 sm:w-9"
       >
         <Icon name="mdi:email-outline" />
       </div>
       <span
-        class="text-xs sm:text-sm tracking-wider text-primary-400 group-hover:text-primary-200 transition-colors break-all"
+        class="text-primary-400 group-hover:text-primary-200 text-xs tracking-wider break-all transition-colors sm:text-sm"
         id="emailText"
       >
         {EMAIL}
@@ -77,14 +71,16 @@ const socialIcons = [
     </div>
   </div>
 
-  <div class="text-xl sm:text-3xl flex flex-wrap items-center justify-center gap-3 sm:gap-4 mt-10 sm:mt-14">
+  <div
+    class="mt-10 flex flex-wrap items-center justify-center gap-3 text-xl sm:mt-14 sm:gap-4 sm:text-3xl"
+  >
     {
       socialIcons.map(({ name, href }) => (
         <a
           href={href}
           target="_blank"
           rel="noopener"
-          class="w-9 h-9 sm:w-11 sm:h-11 flex items-center justify-center border border-primary-700/10 rounded-xl text-primary-700 hover:text-primary-300 hover:border-primary-500/30 hover:bg-primary-900/10 hover:scale-110 transition-all duration-300"
+          class="border-primary-700/10 text-primary-700 hover:text-primary-300 hover:border-primary-500/30 hover:bg-primary-900/10 flex h-9 w-9 items-center justify-center rounded-xl border transition-all duration-300 hover:scale-110 sm:h-11 sm:w-11"
         >
           <Icon name={name} />
         </a>
@@ -95,11 +91,11 @@ const socialIcons = [
 
 <script>
   function copyEmail() {
-    const emailText = document.getElementById("emailText");
+    const emailText = document.getElementById('emailText');
     if (emailText) {
       navigator.clipboard.writeText(emailText.innerText).then(() => {
         const originalText = emailText.innerText;
-        emailText.innerText = "Copied!";
+        emailText.innerText = 'Copied!';
         setTimeout(() => {
           emailText.innerText = originalText;
         }, 2000);

@@ -1,21 +1,21 @@
 ---
-import { GITHUB_LINK } from "../consts";
-import GrainBorderButton from "./GrainBorderButton.astro";
-import HeaderLink from "./HeaderLink.astro";
+import { GITHUB_LINK } from '../consts';
+import GrainBorderButton from './GrainBorderButton.astro';
+import HeaderLink from './HeaderLink.astro';
 ---
 
 <header>
   <nav
-    class="fixed py-3 px-6 top-0 left-0 right-0 z-50 backdrop-blur-2xl bg-dark-500/60 border-b border-primary-700/8"
+    class="bg-dark-500/60 border-primary-700/8 fixed top-0 right-0 left-0 z-50 border-b px-6 py-3 backdrop-blur-2xl"
   >
     <div class="flex items-center justify-between">
       <a
         href="#hero"
-        class="font-jura font-bold text-lg tracking-wider text-primary-300 hover:text-primary-200 transition-colors flex items-center gap-2"
+        class="font-jura text-primary-300 hover:text-primary-200 flex items-center gap-2 text-lg font-bold tracking-wider transition-colors"
       >
         @rodnye
       </a>
-      <div class="hidden md:flex items-center gap-8">
+      <div class="hidden items-center gap-8 md:flex">
         <HeaderLink href="#about">About me</HeaderLink>
         <HeaderLink href="#projects">Projects</HeaderLink>
         <HeaderLink href="#skills">Skills</HeaderLink>
@@ -33,10 +33,10 @@ import HeaderLink from "./HeaderLink.astro";
     </div>
     <div
       id="mobile-menu"
-      class="md:hidden hidden border-t border-primary-700/8 bg-dark-500/95 backdrop-blur-2xl"
+      class="border-primary-700/8 bg-dark-500/95 hidden border-t backdrop-blur-2xl md:hidden"
     >
-      <div class="px-6 py-6 flex flex-col gap-4">
-           <HeaderLink href="#about">About me</HeaderLink>
+      <div class="flex flex-col gap-4 px-6 py-6">
+        <HeaderLink href="#about">About me</HeaderLink>
         <HeaderLink href="#projects">Projects</HeaderLink>
         <HeaderLink href="#skills">Skills</HeaderLink>
         <HeaderLink href="#contact">Contact</HeaderLink>
@@ -136,13 +136,13 @@ import HeaderLink from "./HeaderLink.astro";
 </style>
 <script>
   // Mobile menu toggle
-  const mobileBtn = document.getElementById("mobile-hamb")!;
-  const mobileMenu = document.getElementById("mobile-menu")!;
+  const mobileBtn = document.getElementById('mobile-hamb')!;
+  const mobileMenu = document.getElementById('mobile-menu')!;
   let menuOpen = false;
 
-  mobileBtn.addEventListener("click", () => {
+  mobileBtn.addEventListener('click', () => {
     menuOpen = !menuOpen;
-    mobileMenu.classList.toggle("hidden", !menuOpen);
-    mobileBtn.classList.toggle("open");
+    mobileMenu.classList.toggle('hidden', !menuOpen);
+    mobileBtn.classList.toggle('open');
   });
 </script>

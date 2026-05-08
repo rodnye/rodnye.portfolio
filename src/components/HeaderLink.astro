@@ -1,19 +1,15 @@
 ---
-import type { HTMLAttributes } from "astro/types";
+import type { HTMLAttributes } from 'astro/types';
 
-type Props = HTMLAttributes<"a">;
+type Props = HTMLAttributes<'a'>;
 
 const { href, class: className, ...props } = Astro.props;
-const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, "");
+const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
 const subpath = pathname.match(/[^\/]+/g);
-const isActive = href === pathname || href === "/" + (subpath?.[0] || "");
+const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
 ---
 
-<a
-  href={href}
-  class:list={["nav-link", className, { active: isActive }]}
-  {...props}
->
+<a href={href} class:list={['nav-link', className, { active: isActive }]} {...props}>
   <slot />
 </a>
 
@@ -25,8 +21,8 @@ const isActive = href === pathname || href === "/" + (subpath?.[0] || "");
   }
 
   .nav-link::after {
-    content: "";
-    @apply absolute -bottom-1 left-1/2 h-0.5 w-0 bg-primary;
+    content: '';
+    @apply bg-primary absolute -bottom-1 left-1/2 h-0.5 w-0;
     transition:
       width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
       left 0.4s cubic-bezier(0.16, 1, 0.3, 1);

@@ -1,22 +1,21 @@
 <div id="scrollProgress"></div>
 
 <div
-  class="status-bar hidden md:flex fixed top-20 left-8 md:left-20 right-8 md:right-20 uppercase text-primary gap-5 items-center flex-wrap z-20"
+  class="status-bar text-primary fixed top-20 right-8 left-8 z-20 hidden flex-wrap items-center gap-5 uppercase md:right-20 md:left-20 md:flex"
 >
   <span class="ml-auto" id="scrollPercent">0%</span>
 </div>
 
 <script>
-  const scrollProgress = document.getElementById("scrollProgress");
-  const scrollPercent = document.getElementById("scrollPercent");
+  const scrollProgress = document.getElementById('scrollProgress');
+  const scrollPercent = document.getElementById('scrollPercent');
   function updateScroll() {
     const h = document.documentElement;
     const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
-    if (scrollProgress) scrollProgress.style.width = pct + "%";
-    if (scrollPercent)
-      scrollPercent.textContent = Math.round(pct) + "% scrolled";
+    if (scrollProgress) scrollProgress.style.width = pct + '%';
+    if (scrollPercent) scrollPercent.textContent = Math.round(pct) + '% scrolled';
   }
-  window.addEventListener("scroll", updateScroll);
+  window.addEventListener('scroll', updateScroll);
   updateScroll();
 </script>
 
