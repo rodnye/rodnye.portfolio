@@ -205,7 +205,17 @@ function getLangColor(lang: string): string {
 </div>
 
 <script>
+  function isTouchDevice() {
+    return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  }
+
   function initTilt(card: HTMLElement) {
+    if (isTouchDevice()) {
+      card.style.transform = 'none';
+      card.classList.add('touch-device');
+      return;
+    }
+
     card.addEventListener('mousemove', (e: MouseEvent) => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
@@ -227,13 +237,66 @@ function getLangColor(lang: string): string {
     position: relative;
     border: 1px solid rgba(201, 168, 76, 0.08);
     background: rgba(13, 13, 13, 0.7);
-    backdrop-filter: blur(16px);
     transition:
       border-color 0.5s,
       box-shadow 0.5s;
     transform-style: preserve-3d;
     perspective: 800px;
   }
+
+  .tilt-card.touch-device {
+    transform: none !important;
+    perspective: none;
+    cursor: pointer;
+  }
+
+  .tilt-card.touch-device .card-spotlight {
+    display: none;
+  }
+
+  .tilt-card.touch-device:hover {
+    border-color: rgba(201, 168, 76, 0.08);
+    box-shadow: none;
+  }
+
+  .tilt-card.touch-device .card-image-frame,
+  .tilt-card.touch-device .card-icon-fallback {
+    transition: none;
+  }
+
+  .tilt-card.touch-device:hover .card-image-frame,
+  .tilt-card.touch-device:hover .card-icon-fallback {
+    transform: none;
+  }
+
+  .tilt-card.touch-device .card-image-src {
+    transition: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .tilt-card:not(.touch-device):hover {
+      border-color: rgba(201, 168, 76, 0.25);
+      box-shadow: 0 25px 70px -15px rgba(201, 168, 76, 0.12);
+    }
+    .tilt-card:not(.touch-device):hover .card-spotlight {
+      opacity: 1;
+    }
+    .tilt-card:not(.touch-device):hover .card-image-frame {
+      border-color: rgba(201, 168, 76, 0.15);
+      background: rgba(201, 168, 76, 0.06);
+      transform: scale(1.03);
+    }
+    .tilt-card:not(.touch-device):hover .card-image-src {
+      opacity: 1;
+      filter: saturate(1) brightness(1);
+    }
+    .tilt-card:not(.touch-device):hover .card-icon-fallback {
+      border-color: rgba(201, 168, 76, 0.18);
+      background: rgba(201, 168, 76, 0.08);
+      transform: scale(1.08);
+    }
+  }
+
   .tilt-card .card-spotlight {
     position: absolute;
     inset: 0;
@@ -246,13 +309,6 @@ function getLangColor(lang: string): string {
       rgba(201, 168, 76, 0.06),
       transparent 60%
     );
-  }
-  .tilt-card:hover {
-    border-color: rgba(201, 168, 76, 0.25);
-    box-shadow: 0 25px 70px -15px rgba(201, 168, 76, 0.12);
-  }
-  .tilt-card:hover .card-spotlight {
-    opacity: 1;
   }
 
   /* ── Zona de imagen ── */
@@ -275,12 +331,6 @@ function getLangColor(lang: string): string {
       transform 0.4s;
   }
 
-  .tilt-card:hover .card-image-frame {
-    border-color: rgba(201, 168, 76, 0.15);
-    background: rgba(201, 168, 76, 0.06);
-    transform: scale(1.03);
-  }
-
   .card-image-src {
     height: 56px;
     width: auto;
@@ -291,11 +341,6 @@ function getLangColor(lang: string): string {
     transition:
       opacity 0.4s,
       filter 0.4s;
-  }
-
-  .tilt-card:hover .card-image-src {
-    opacity: 1;
-    filter: saturate(1) brightness(1);
   }
 
   /* Fallback cuando no hay imagen */
@@ -317,11 +362,5 @@ function getLangColor(lang: string): string {
   .card-icon-fallback > svg {
     width: 24px;
     height: 24px;
-  }
-
-  .tilt-card:hover .card-icon-fallback {
-    border-color: rgba(201, 168, 76, 0.18);
-    background: rgba(201, 168, 76, 0.08);
-    transform: scale(1.08);
   }
 </style>
