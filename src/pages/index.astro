@@ -11,7 +11,9 @@ import ContactSection from '@/features/about/sections/ContactSection.astro';
 import HeaderSection from '@/features/about/sections/HeaderSection.astro';
 import ProjectsSection from '@/features/about/sections/ProjectsSection.astro';
 
+import devImg from '@/assets/dev.webp';
 import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
 ---
 
 <AboutLayout>
@@ -63,7 +65,7 @@ import { Icon } from 'astro-icon/components';
 
   <section class="relative -z-5">
     <div class="absolute right-0 bottom-10 w-80 opacity-60 md:bottom-25 lg:w-120">
-      <img src="/src/assets/dev.webp" />
+      <Image src={devImg} alt="Dev picture" />
     </div>
     <SkillMarquee />
   </section>
