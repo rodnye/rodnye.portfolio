@@ -1,6 +1,90 @@
 ---
 import { GITHUB_LINK } from '@/consts';
 import { Icon } from 'astro-icon/components';
+
+const projects = [
+  {
+    name: 'FB Autopublisher',
+    url: 'https://fb-autopublisher.italia.mdialityc.com/',
+    description: 'Facebook autopublisher for spam oriented to sales managers',
+    language: 'TypeScript',
+    stars: null,
+    forks: null,
+    topics: ['facebook', 'automation', 'marketing'],
+    date: 'Jan 2026',
+    icon: 'mdi:robot',
+    image: 'https://fb-autopublisher.italia.mdialityc.com/assets/original-logo_660-D-rstn3s.webp',
+  },
+  {
+    name: 'cafe-ipv',
+    url: 'https://github.com/rodnye/cafe-ipv',
+    description: 'Android/Web app for product management, daily orders, and inventory table',
+    language: 'Vue',
+    stars: 3,
+    forks: 0,
+    topics: ['android', 'vite', 'vue3'],
+    date: 'Apr 2026',
+    icon: 'mdi:android',
+    image: 'https://rodnye.github.io/cafe-ipv/assets/icon-logo-PZi9_iPw.png',
+  },
+  {
+    name: 'literary-blog',
+    url: 'https://github.com/rodnye/literary-blog',
+    description: 'A custom Astro blog with GitHub branch persistence and Decap-CMS',
+    language: 'Astro',
+    stars: 6,
+    forks: 0,
+    topics: ['astro', 'blog', 'decap-cms'],
+    date: 'Apr 2026',
+    icon: 'mdi:book',
+    image: 'https://github.com/rodnye/literary-blog/raw/master/docs/assets/logo_preview.webp',
+  },
+  {
+    name: 'kodekloud.inspector',
+    url: 'https://github.com/rodnye/kodekloud.inspector',
+    description: 'Inspector for all KodeKloud courses compiled in Markdown',
+    language: 'TypeScript',
+    stars: 13,
+    forks: 2,
+    topics: [],
+    date: 'Apr 2026',
+    icon: 'mdi:robot',
+    image:
+      'https://mintcdn.com/kodekloud-c4ac6d9a/_u8CNiGuy79Fq3Fu/logo/dark.svg?fit=max&auto=format&n=_u8CNiGuy79Fq3Fu&q=85&s=14458e15af4945d2a9554c2d1d9af71d',
+  },
+  {
+    name: 'codepicker',
+    url: 'https://github.com/rodnye/codepicker',
+    description:
+      'Pick code into Markdown. Apply Markdown to code. Built for LLMs and quick backups.',
+    language: 'TypeScript',
+    stars: 8,
+    forks: 0,
+    topics: ['ai', 'cli', 'llm-tools', 'prompt-engineering'],
+    date: 'May 2026',
+    icon: 'mdi:toolbox',
+    image: 'https://raw.githubusercontent.com/rodnye/codepicker/refs/heads/main/docs/logo.png',
+  },
+];
+
+function getLangColor(lang: string): string {
+  const colors: Record<string, string> = {
+    JavaScript: '#F7DF1E',
+    TypeScript: '#3178C6',
+    Python: '#3776AB',
+    HTML: '#E34F26',
+    CSS: '#1572B6',
+    Java: '#ED8B00',
+    Go: '#00ADD8',
+    Rust: '#CE422B',
+    'C++': '#00599C',
+    C: '#A8B9CC',
+    Ruby: '#CC342D',
+    Vue: '#4FC08D',
+    Astro: '#FF5D01',
+  };
+  return colors[lang] || '#C9A84C';
+}
 ---
 
 <div class="mx-auto max-w-6xl">
@@ -15,38 +99,102 @@ import { Icon } from 'astro-icon/components';
     </h2>
   </div>
 
-  <div id="reposLoading" class="flex flex-col items-center justify-center py-20">
-    <div class="relative mb-4 h-10 w-10">
-      <div class="border-primary-700/20 absolute inset-0 rounded-full border-2"></div>
-      <div
-        class="border-primary-500/60 absolute inset-0 animate-spin rounded-full border-2 border-t-transparent"
-      >
-      </div>
-    </div>
-    <span class="text-primary-700 text-sm tracking-[.2em]">Cargando repositorios...</span>
+  <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+    {
+      projects.map((project, i) => {
+        const lc = project.language ? getLangColor(project.language) : '';
+        const delay = Math.min(i + 1, 7);
+        return (
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noopener"
+            class="tilt-card reveal reveal-d{delay} group flex flex-col overflow-hidden rounded-xl"
+          >
+            <div class="card-spotlight" />
+
+            {/* ── Imagen / Logo header ── */}
+            <div class="card-image-zone relative z-10 flex items-center justify-center px-6 pt-6 pb-2">
+              {project.image ? (
+                <div class="card-image-frame">
+                  <img
+                    src={project.image}
+                    alt={`${project.name} branding`}
+                    class="card-image-src"
+                    loading="lazy"
+                    width="160"
+                    height="80"
+                  />
+                </div>
+              ) : (
+                <div class="card-icon-fallback">
+                  <Icon name={project.icon} class="text-primary-600/60" />
+                </div>
+              )}
+            </div>
+
+            {/* ── Cuerpo ── */}
+            <div class="relative z-10 flex grow flex-col gap-4 px-6 pt-2 pb-6">
+              <div class="flex items-start justify-between gap-3">
+                <h3 class="font-jura text-primary-200 truncate font-semibold">{project.name}</h3>
+                <Icon
+                  name="mdi:arrow-top-right"
+                  class="text-primary-900 group-hover:text-primary-500 mt-0.5 shrink-0 transition-colors duration-300"
+                />
+              </div>
+              <p class="text-primary-600/50 grow text-sm leading-relaxed">{project.description}</p>
+              {project.topics.length > 0 && (
+                <div class="flex flex-wrap gap-1.5">
+                  {project.topics.map((topic) => (
+                    <span class="text-primary-700/60 border-primary-700/[0.06] bg-primary-900/5 rounded border px-2 py-0.5 text-xs tracking-wider">
+                      {topic}
+                    </span>
+                  ))}
+                </div>
+              )}
+              <div class="text-primary-800 border-primary-700/[0.05] flex items-center gap-4 border-t pt-2 text-sm">
+                {project.language ? (
+                  <span class="flex items-center gap-1.5">
+                    <span
+                      class="h-2 w-2 rounded-full"
+                      style={`background:${lc};box-shadow:0 0 4px ${lc}40`}
+                    />
+                    {project.language}
+                  </span>
+                ) : (
+                  <span />
+                )}
+                {project.stars !== null && (
+                  <span class="flex items-center gap-1">
+                    <Icon name="mdi:star-four-points-outline" />
+                    {project.stars}
+                  </span>
+                )}
+                {project.forks !== null && (
+                  <span class="flex items-center gap-1">
+                    <Icon name="mdi:source-fork" />
+                    {project.forks}
+                  </span>
+                )}
+                {project.date && <span class="ml-auto opacity-50">{project.date}</span>}
+              </div>
+            </div>
+          </a>
+        );
+      })
+    }
   </div>
-  <div id="reposGrid" class="grid gap-5 md:grid-cols-2 lg:grid-cols-3"></div>
-  <div id="reposError" class="hidden py-20 text-center">
-    <Icon class="text-primary-700 mx-auto mb-4 text-2xl" name="mdi:alert-circle-outline" />
-    <p class="text-primary-700 text-sm">No se pudieron cargar los repositorios</p>
+
+  <div class="mt-14 text-center">
     <a
-      href={GITHUB_LINK + '?tab=repositories'}
-      target="_blank"
-      class="text-primary-500 hover:text-primary-300 mt-4 inline-block text-sm underline underline-offset-4 transition-colors"
-    >
-      Ver en GitHub →
-    </a>
-  </div>
-  <div class="reveal mt-14 text-center">
-    <a
-      href={GITHUB_LINK + '?tab=repositories'}
+      href={GITHUB_LINK + '?tab=repositories&type=source&sort=stargazers'}
       target="_blank"
       rel="noopener"
-      class="text-primary-600 hover:text-primary-400 group border-primary-700/10 hover:border-primary-700/20 inline-flex items-center gap-2 rounded-lg border px-6 py-3 text-sm tracking-[.2em] transition-colors"
+      class="text-primary-600 hover:text-primary-400 group border-primary-700/10 hover:border-primary-700/20 inline-flex items-center gap-2 rounded-lg border px-6 py-3 transition-colors"
     >
       <span class="btn-shine rounded-lg"></span>
       <span class="relative z-10 flex items-center gap-2">
-        Ver todos
+        Show more
         <Icon
           class="transition-transform duration-300 group-hover:translate-x-1"
           name="mdi:arrow-right"
@@ -71,87 +219,7 @@ import { Icon } from 'astro-icon/components';
     });
   }
 
-  function getLangColor(lang: string): string {
-    const colors: Record<string, string> = {
-      JavaScript: '#F7DF1E',
-      TypeScript: '#3178C6',
-      Python: '#3776AB',
-      HTML: '#E34F26',
-      CSS: '#1572B6',
-      Java: '#ED8B00',
-      Go: '#00ADD8',
-      Rust: '#CE422B',
-      'C++': '#00599C',
-      C: '#A8B9CC',
-      Ruby: '#CC342D',
-    };
-    return colors[lang] || '#C9A84C';
-  }
-
-  async function fetchAndRenderRepos() {
-    const loading = document.getElementById('reposLoading');
-    const grid = document.getElementById('reposGrid');
-    const errorDiv = document.getElementById('reposError');
-    try {
-      const res = await fetch('https://api.github.com/users/rodnye/repos?sort=updated&per_page=9');
-      if (!res.ok) throw new Error();
-      const repos = await res.json();
-      const filtered = repos.filter((r: any) => !r.fork).slice(0, 6);
-      if (!filtered.length) throw new Error();
-      grid!.innerHTML = filtered
-        .map((repo: any, i: number) => {
-          const lang = repo.language || '';
-          const lc = getLangColor(lang);
-          const desc = repo.description
-            ? repo.description.length > 90
-              ? repo.description.slice(0, 90) + '…'
-              : repo.description
-            : 'Sin descripción disponible';
-          const date = new Date(repo.updated_at).toLocaleDateString('es-ES', {
-            year: 'numeric',
-            month: 'short',
-          });
-          const topics = (repo.topics || []).slice(0, 3);
-          return `<a href="${repo.html_url}" target="_blank" rel="noopener" class="tilt-card rounded-xl p-6 flex flex-col gap-4 reveal reveal-d${Math.min(i + 1, 7)}">
-          <div class="card-spotlight"></div>
-          <div class="flex items-start justify-between gap-3 relative z-10">
-            <div class="flex items-center gap-2.5 min-w-0">
-              <div class="w-8 h-8 rounded-lg bg-primary-900/15 border border-primary-700/10 flex items-center justify-center flex-shrink-0"><span class="iconify text-primary-600" data-icon="mdi:source-repository" data-width="15"></span></div>
-              <h3 class="font-jura font-semibold text-sm text-primary-200 truncate">${repo.name}</h3>
-            </div>
-            <span class="iconify text-primary-900 hover:text-primary-500 transition-colors flex-shrink-0 mt-1" data-icon="mdi:arrow-top-right" data-width="14"></span>
-          </div>
-          <p class="text-sm text-primary-600/50 leading-relaxed flex-grow relative z-10">${desc}</p>
-          ${topics.length ? `<div class="flex flex-wrap gap-1.5 relative z-10">${topics.map((t: string) => `<span class="px-2 py-0.5 text-xs tracking-wider text-primary-700/60 border border-primary-700/[0.06] rounded bg-primary-900/5">${t}</span>`).join('')}</div>` : ''}
-          <div class="flex items-center gap-4 text-sm text-primary-800 relative z-10 pt-2 border-t border-primary-700/[0.05]">
-            ${lang ? `<span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full" style="background:${lc};box-shadow:0 0 4px ${lc}40"></span>${lang}</span>` : '<span></span>'}
-            <span class="flex items-center gap-1"><span class="iconify" data-icon="mdi:star-four-points-outline" data-width="11"></span>${repo.stargazers_count}</span>
-            <span class="flex items-center gap-1"><span class="iconify" data-icon="mdi:source-fork" data-width="11"></span>${repo.forks_count}</span>
-            <span class="ml-auto opacity-50">${date}</span>
-          </div>
-        </a>`;
-        })
-        .join('');
-      loading?.classList.add('hidden');
-      grid?.classList.remove('hidden');
-      document
-        .querySelectorAll('#reposGrid .tilt-card')
-        .forEach((card) => initTilt(card as HTMLElement));
-      // Re-trigger reveal observer if needed (global observer will catch new .reveal elements)
-      if ((window as any).revealObserver) {
-        document
-          .querySelectorAll('#reposGrid .reveal')
-          .forEach((el) => (window as any).revealObserver.observe(el));
-      }
-    } catch (err) {
-      loading?.classList.add('hidden');
-      errorDiv?.classList.remove('hidden');
-    }
-  }
-  // Wait for DOM and iconify to be ready
-  if (document.readyState === 'loading')
-    document.addEventListener('DOMContentLoaded', fetchAndRenderRepos);
-  else fetchAndRenderRepos();
+  document.querySelectorAll('.tilt-card').forEach((card) => initTilt(card as HTMLElement));
 </script>
 
 <style is:global>
@@ -185,5 +253,75 @@ import { Icon } from 'astro-icon/components';
   }
   .tilt-card:hover .card-spotlight {
     opacity: 1;
+  }
+
+  /* ── Zona de imagen ── */
+  .card-image-zone {
+    min-height: 100px;
+    border-bottom: 1px solid rgba(201, 168, 76, 0.05);
+  }
+
+  .card-image-frame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 10px;
+    background: rgba(201, 168, 76, 0.03);
+    border: 1px solid rgba(201, 168, 76, 0.06);
+    transition:
+      border-color 0.4s,
+      background 0.4s,
+      transform 0.4s;
+  }
+
+  .tilt-card:hover .card-image-frame {
+    border-color: rgba(201, 168, 76, 0.15);
+    background: rgba(201, 168, 76, 0.06);
+    transform: scale(1.03);
+  }
+
+  .card-image-src {
+    height: 56px;
+    width: auto;
+    max-width: 160px;
+    object-fit: contain;
+    opacity: 0.7;
+    filter: saturate(0.6) brightness(0.9);
+    transition:
+      opacity 0.4s,
+      filter 0.4s;
+  }
+
+  .tilt-card:hover .card-image-src {
+    opacity: 1;
+    filter: saturate(1) brightness(1);
+  }
+
+  /* Fallback cuando no hay imagen */
+  .card-icon-fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    background: rgba(201, 168, 76, 0.04);
+    border: 1px solid rgba(201, 168, 76, 0.07);
+    transition:
+      border-color 0.4s,
+      background 0.4s,
+      transform 0.4s;
+  }
+
+  .card-icon-fallback > svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .tilt-card:hover .card-icon-fallback {
+    border-color: rgba(201, 168, 76, 0.18);
+    background: rgba(201, 168, 76, 0.08);
+    transform: scale(1.08);
   }
 </style>
