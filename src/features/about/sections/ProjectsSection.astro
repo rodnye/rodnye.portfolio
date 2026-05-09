@@ -1,12 +1,13 @@
 ---
 import { GITHUB_LINK } from '@/consts';
+import { Icon } from 'astro-icon/components';
 ---
 
 <div class="mx-auto max-w-6xl">
   <div class="mb-16 text-center">
-    <span class="reveal text-primary-700 mb-4 block text-[10px] tracking-[.35em] uppercase"
-      >02 — Projects</span
-    >
+    <span class="reveal text-primary-700 mb-4 block text-sm tracking-[.35em] uppercase">
+      02 — Projects
+    </span>
     <h2
       class="reveal reveal-d1 font-jura text-primary-200 text-3xl font-bold tracking-tight md:text-5xl"
     >
@@ -22,36 +23,35 @@ import { GITHUB_LINK } from '@/consts';
       >
       </div>
     </div>
-    <span class="text-primary-700 text-[11px] tracking-[.2em]">Cargando repositorios...</span>
+    <span class="text-primary-700 text-sm tracking-[.2em]">Cargando repositorios...</span>
   </div>
   <div id="reposGrid" class="grid gap-5 md:grid-cols-2 lg:grid-cols-3"></div>
   <div id="reposError" class="hidden py-20 text-center">
-    <span
-      class="iconify text-primary-700 mx-auto mb-4"
-      data-icon="mdi:alert-circle-outline"
-      data-width="40"></span>
+    <Icon class="text-primary-700 mx-auto mb-4 text-2xl" name="mdi:alert-circle-outline" />
     <p class="text-primary-700 text-sm">No se pudieron cargar los repositorios</p>
     <a
       href={GITHUB_LINK + '?tab=repositories'}
       target="_blank"
       class="text-primary-500 hover:text-primary-300 mt-4 inline-block text-sm underline underline-offset-4 transition-colors"
-      >Ver en GitHub →</a
     >
+      Ver en GitHub →
+    </a>
   </div>
   <div class="reveal mt-14 text-center">
     <a
       href={GITHUB_LINK + '?tab=repositories'}
       target="_blank"
       rel="noopener"
-      class="magnetic-btn text-primary-600 hover:text-primary-400 group border-primary-700/10 hover:border-primary-700/20 inline-flex items-center gap-2 rounded-lg border px-6 py-3 text-[11px] tracking-[.2em] transition-colors"
+      class="text-primary-600 hover:text-primary-400 group border-primary-700/10 hover:border-primary-700/20 inline-flex items-center gap-2 rounded-lg border px-6 py-3 text-sm tracking-[.2em] transition-colors"
     >
       <span class="btn-shine rounded-lg"></span>
-      <span class="relative z-10 flex items-center gap-2"
-        >Ver todos<span
-          class="iconify transition-transform duration-300 group-hover:translate-x-1"
-          data-icon="mdi:arrow-right"
-          data-width="14"></span></span
-      >
+      <span class="relative z-10 flex items-center gap-2">
+        Ver todos
+        <Icon
+          class="transition-transform duration-300 group-hover:translate-x-1"
+          name="mdi:arrow-right"
+        />
+      </span>
     </a>
   </div>
 </div>
@@ -121,9 +121,9 @@ import { GITHUB_LINK } from '@/consts';
             </div>
             <span class="iconify text-primary-900 hover:text-primary-500 transition-colors flex-shrink-0 mt-1" data-icon="mdi:arrow-top-right" data-width="14"></span>
           </div>
-          <p class="text-[11px] text-primary-600/50 leading-relaxed flex-grow relative z-10">${desc}</p>
-          ${topics.length ? `<div class="flex flex-wrap gap-1.5 relative z-10">${topics.map((t: string) => `<span class="px-2 py-0.5 text-[9px] tracking-wider text-primary-700/60 border border-primary-700/[0.06] rounded bg-primary-900/5">${t}</span>`).join('')}</div>` : ''}
-          <div class="flex items-center gap-4 text-[10px] text-primary-800 relative z-10 pt-2 border-t border-primary-700/[0.05]">
+          <p class="text-sm text-primary-600/50 leading-relaxed flex-grow relative z-10">${desc}</p>
+          ${topics.length ? `<div class="flex flex-wrap gap-1.5 relative z-10">${topics.map((t: string) => `<span class="px-2 py-0.5 text-xs tracking-wider text-primary-700/60 border border-primary-700/[0.06] rounded bg-primary-900/5">${t}</span>`).join('')}</div>` : ''}
+          <div class="flex items-center gap-4 text-sm text-primary-800 relative z-10 pt-2 border-t border-primary-700/[0.05]">
             ${lang ? `<span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full" style="background:${lc};box-shadow:0 0 4px ${lc}40"></span>${lang}</span>` : '<span></span>'}
             <span class="flex items-center gap-1"><span class="iconify" data-icon="mdi:star-four-points-outline" data-width="11"></span>${repo.stargazers_count}</span>
             <span class="flex items-center gap-1"><span class="iconify" data-icon="mdi:source-fork" data-width="11"></span>${repo.forks_count}</span>

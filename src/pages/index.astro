@@ -1,5 +1,87 @@
 ---
-import AboutPage from '@/features/about/AboutPage.astro';
+import MeshBackground from '@/components/decor/MeshBackground.astro';
+import OrbitsBackground from '@/components/decor/OrbitsBackground.astro';
+import Divisor from '@/components/ui/Divisor.astro';
+
+import AboutLayout from '@/features/about/AboutLayout.astro';
+import SkillMarquee from '@/features/about/components/SkillMarquee.astro';
+import TypingEffect from '@/features/about/components/TypingEffect.astro';
+import AboutSection from '@/features/about/sections/AboutSection.astro';
+import ContactSection from '@/features/about/sections/ContactSection.astro';
+import HeaderSection from '@/features/about/sections/HeaderSection.astro';
+import ProjectsSection from '@/features/about/sections/ProjectsSection.astro';
+
+import { Icon } from 'astro-icon/components';
 ---
 
-<AboutPage />
+<AboutLayout>
+  <HeaderSection />
+
+  <!-- Hero Section -->
+  <section
+    id="hero"
+    class="relative flex flex-col items-center justify-center overflow-hidden px-6"
+  >
+    <MeshBackground />
+    <OrbitsBackground />
+
+    <div class="relative z-10 flex max-w-4xl flex-col md:self-start md:pl-12 lg:self-auto lg:pb-50">
+      <h1 class="font-jura mt-20 mb-6 text-center text-5xl font-bold tracking-tighter md:text-left">
+        <span
+          class="taos:translate-y-full taos:opacity-0 text-primary-300/30 mb-2 block text-2xl font-light tracking-widest duration-600 sm:text-3xl md:text-4xl"
+        >
+          Hi, I'm
+        </span>
+        <span class="taos:translate-y-80 taos:opacity-0 shimmer duration-800">Rodny Estrada</span>
+      </h1>
+
+      <div class="mb-8 h-8">
+        <TypingEffect />
+      </div>
+
+      <div class="mt-30 flex flex-col items-center justify-center gap-4 sm:flex-row md:mt-20">
+        <a
+          href="#projects"
+          class="from-primary-700 via-primary-600 to-primary-500 text-dark-900 font-jura rounded-lg bg-linear-to-r px-8 py-4 text-sm font-semibold tracking-[.15em] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(201,168,76,0.25)]"
+        >
+          <span class="btn-shine rounded-lg"></span>
+          <span class="relative z-10 flex items-center gap-2">
+            View Projects
+            <Icon name="mdi:arrow-down-right" />
+          </span>
+        </a>
+        <a
+          href="#contact"
+          class="border-primary-700/20 text-primary-400 font-jura hover:border-primary-500/40 hover:text-primary-200 hover:bg-primary-900/5 rounded-lg border px-8 py-4 text-sm font-semibold tracking-[.15em] transition-all duration-300"
+        >
+          <span class="btn-shine rounded-lg"></span>
+          <span class="relative z-10"> Contact Me </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative -z-5">
+    <div class="absolute right-0 bottom-10 w-80 opacity-60 md:bottom-25 lg:w-120">
+      <img src="/src/assets/dev.webp" />
+    </div>
+    <SkillMarquee />
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="relative px-6 py-32">
+    <AboutSection />
+  </section>
+  <Divisor />
+
+  <!-- Projects Section -->
+  <section id="projects" class="relative px-6 py-32">
+    <ProjectsSection />
+  </section>
+  <Divisor />
+
+  <!-- Contact Section -->
+  <section id="contact" class="relative px-6 py-32">
+    <ContactSection />
+  </section>
+</AboutLayout>
