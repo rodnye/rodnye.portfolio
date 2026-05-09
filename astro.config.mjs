@@ -1,5 +1,6 @@
 // @ts-check
 
+import path from 'node:path';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { defineConfig, fontProviders } from 'astro/config';
@@ -53,6 +54,11 @@ export default defineConfig({
   ],
 
   vite: {
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, 'src'),
+      },
+    },
     // @ts-ignore
     plugins: [tailwindcss()],
   },
